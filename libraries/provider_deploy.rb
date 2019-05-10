@@ -390,11 +390,8 @@ class Chef
         run_opts[:timeout] = new_resource.timeout if new_resource.timeout
         run_opts[:log_tag] = new_resource.to_s
         run_opts[:log_level] ||= :debug
-        if run_opts[:log_level] == :info
-          if STDOUT.tty? && !Chef::Config[:daemon] && Chef::Log.info?
-            run_opts[:live_stream] = STDOUT
-          end
-        end
+        # we always want to know what happens
+        run_opts[:live_stream] = STDOUT
         run_opts
       end
 
