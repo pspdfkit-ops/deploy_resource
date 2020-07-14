@@ -37,6 +37,8 @@ class Chef
         # and will create a resource corresponding to that provider
         @scm_provider = new_resource.scm_provider.new(new_resource, run_context)
 
+        @scm_provider.new_resource.checkout_branch('deploy')
+
         # @configuration is not used by Deploy, it is only for backwards compat with
         # chef-deploy or capistrano hooks that might use it to get environment information
         @configuration = new_resource.to_hash
